@@ -1,4 +1,5 @@
 import math
+import re
 
 class HesapMotoru:
     def __init__(self, ekstra_fonksiyonlar=None):
@@ -17,6 +18,8 @@ class HesapMotoru:
         return ortam
     
     def _cevir(self, ifade):
+        ifade = re.sub(r"√(\d+)", r"sqrt(\1)", ifade)
+
         degisimler = {
             "×": "*",
             "÷": "/",
@@ -37,6 +40,12 @@ class HesapMotoru:
         return str(sonuc)
     
     def hesapla(self, ifade):
+        acikParantez = ifade.count("(")
+        kapaliParantez = ifade.count(")")
+
+        if acikParantez != kapaliParantez:
+            return "Eksik parantez kullanımı"
+        
         if not ifade.strip():
             return ""
         try:
