@@ -11,19 +11,7 @@ app = Flask(__name__)
 # HESAPLAMA MOTORU (Senin Altyapın)
 # ==========================================
 
-def bilimsel_fonksiyon_ekle(ifade):
-    ifade = ifade.replace('log(', 'math.log10(')
-    ifade = ifade.replace('ln(', 'math.log(')
-    ifade = ifade.replace('10^', '10**')
-    ifade = ifade.replace('e^', 'math.e**')
-    ifade = ifade.replace('pi', 'math.pi')
-    ifade = ifade.replace('e', 'math.e')
-    ifade = ifade.replace('sqrt(', 'math.sqrt(')
-
-    for func in ['sin', 'cos', 'tan', 'asin', 'acos', 'atan']:
-        ifade = ifade.replace(f'{func}(', f'math.{func}(')
-    return ifade
-
+from bilimsel import bilimsel_fonksiyon_ekle
 
 class HesapMotoru:
     def _guvenli_ortam(self):
